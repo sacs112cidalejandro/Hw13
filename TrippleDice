@@ -1,0 +1,71 @@
+public class Hw13_Program 
+{
+	public static void main(String[] args) 
+	
+	{
+		try
+		{
+		Tripple_Dice dice1=new Tripple_Dice();
+		Tripple_Dice dice2 = (Tripple_Dice)dice1.clone();
+		System.out.println(dice1);
+		System.out.println(dice2);
+		
+		System.out.println(dice1.equals(dice2));
+	}
+		catch(CloneNotSupportedException c)
+		{
+			System.err.println("Error.");
+		}
+	}
+}
+
+public class Tripple_Dice extends Dice13 implements Cloneable
+
+{
+	private  int Number;
+	@Override
+	public int Throw()
+	{		
+		Number=super.Throw()+super.Throw()+super.Throw();
+		return Number;
+	}
+	public int getNumber()
+	{
+		return Number;
+	}
+	public boolean equals(Tripple_Dice obj)
+	{
+		if(this.getNumber()==obj.getNumber())return true;
+		else return false;
+	}
+	public String toString()
+	{
+		return String.format("Random number is:%d",Throw());
+	}
+	
+	public Object clone()throws CloneNotSupportedException{  
+		return super.clone();  
+		}  
+
+}
+
+public class Dice13 
+{
+	private int Number;
+	public  int Throw()
+	{
+		Number=( (int)(Math.random()*6 ) + 1 );
+		return Number;
+	}
+	public  int Throw(int dices)
+	{
+		Number=dices * ( (int)(Math.random()*6 ) + 1 );
+		return Number;
+	}
+	public  int Throw(int dices, int bounces)
+	{
+		
+		Number=dices * ((int)(Math.random()*6)+1) + bounces;
+		return Number;
+	}
+}
